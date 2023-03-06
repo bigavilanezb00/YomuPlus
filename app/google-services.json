@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "192765963244",
+    "project_id": "yomuplus-3ae4f",
+    "storage_bucket": "yomuplus-3ae4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192765963244:android:a1d0aacf6870260bc3eec9",
+        "android_client_info": {
+          "package_name": "com.example.yomuplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192765963244-r8fu1kl0nkh0pbsolarpthvpfn6l3rpp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBjN-axeDGBmLfTzi8latVu-kj6Ohvnto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192765963244-r8fu1kl0nkh0pbsolarpthvpfn6l3rpp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
