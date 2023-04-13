@@ -5,23 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_login"
-    tools:context=".RegisterActivity">
-
+    tools:context=".LoginActivity">
+    
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/shape_toolbar01">
-
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_back_white"
-            android:background="@android:color/transparent"
-            android:layout_margin="10dp"
-            android:padding="5dp"/>
-
+        
         <ImageView
             android:id="@+id/iconIv"
             android:layout_width="110dp"
@@ -36,7 +27,7 @@
             android:layout_below="@+id/iconIv"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="Crea una cuenta"
+            android:text="Por favor inicie sesión"
             android:textColor="#FFFFFF"
             android:fontFamily="sans-serif-condensed"
             android:textSize="28sp"/>
@@ -48,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="30dp"
+        android:layout_above="@id/noAccountTv"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="225dp">
 
@@ -55,35 +47,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Nombre -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nombreTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:hintEnabled="false">
-
-                <EditText
-                    android:id="@+id/nombreEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_edittext01"
-                    android:drawableStart="@drawable/ic_persona_gray"
-                    android:drawablePadding="10dp"
-                    android:hint="Nombre"
-                    android:inputType="textPersonName|textCapWords"
-                    android:padding="10dp"
-                    android:textColor="@color/gray01"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
             <!-- Email -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/nombreTil"
-                android:layout_marginTop="5dp"
                 app:hintEnabled="false">
 
                 <EditText
@@ -105,9 +73,8 @@
                 android:id="@+id/passwordTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/emailTil"
-                android:layout_marginTop="5dp"
                 app:passwordToggleEnabled="true"
+                android:layout_below="@+id/emailTil"
                 app:hintEnabled="false">
 
                 <EditText
@@ -124,43 +91,41 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Confirmar Password -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cPasswordTil"
-                android:layout_width="match_parent"
+            <!-- Contraseña olvidada -->
+            <TextView
+                android:id="@+id/forgotTv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/passwordTil"
-                android:layout_marginTop="5dp"
-                app:passwordToggleEnabled="true"
-                app:hintEnabled="false">
+                android:layout_below="@id/passwordTil"
+                android:layout_alignParentEnd="true"
+                android:padding="5dp"
+                android:text="¿Olvidaste la contraseña?"
+                android:textColor="@color/gray02"/>
 
-                <EditText
-                    android:id="@+id/cPasswordEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_edittext01"
-                    android:drawableStart="@drawable/ic_lock_gray"
-                    android:drawablePadding="10dp"
-                    android:hint="Confirmar contraseña"
-                    android:inputType="textPassword"
-                    android:padding="10dp"
-                    android:textColor="@color/gray01"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Boton registrar -->
+            <!-- Boton iniciar sesión -->
             <Button
-                android:id="@+id/registerBtn"
+                 android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cPasswordTil"
+                android:layout_below="@+id/forgotTv"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/shape_button01"
-                android:text="Registrate"
+                android:text="Iniciar sesión"
                 android:textColor="@color/blanco"/>
 
         </RelativeLayout>
 
     </ScrollView>
+
+    <!-- Registro -->
+    <TextView
+        android:id="@+id/noAccountTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:text="@string/nuevo_usuario_registrate"
+        android:textColor="@color/negro"/>
 
 </RelativeLayout>

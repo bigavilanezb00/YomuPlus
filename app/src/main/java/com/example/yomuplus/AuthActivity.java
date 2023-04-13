@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.yomuplus.databinding.ActivityAuthBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -19,7 +20,32 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AuthActivity extends AppCompatActivity {
 
-    Button btn_login, btn_register;
+    private ActivityAuthBinding binding;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityAuthBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        //Boton para entrar iniciando sesión
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AuthActivity.this, LoginActivity.class));
+            }
+        });
+
+        //Boton para entrar sin iniciar sesión
+        binding.skipBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AuthActivity.this, DashboardUserActivity.class));
+            }
+        });
+    }
+
+    /*Button btn_login, btn_register;
     EditText email, password;
     FirebaseAuth mAuth;
 
@@ -76,6 +102,6 @@ public class AuthActivity extends AppCompatActivity {
     public void onClick(View view) {
         Intent miIntent = new Intent(AuthActivity.this, RegisterActivity.class);
         startActivity(miIntent);
-    }
+    }*/
 
 }
