@@ -1,4 +1,4 @@
-package com.example.yomuplus;
+package com.example.yomuplus.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

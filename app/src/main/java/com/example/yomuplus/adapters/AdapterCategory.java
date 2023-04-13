@@ -16,10 +16,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.yomuplus.PdfListAdminActivity;
+import com.example.yomuplus.activities.PdfListAdminActivity;
+import com.example.yomuplus.databinding.RowCategoryBinding;
 import com.example.yomuplus.filters.FilterCategory;
 import com.example.yomuplus.models.ModelCategory;
-import com.example.yomuplus.databinding.RowCategoryBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;

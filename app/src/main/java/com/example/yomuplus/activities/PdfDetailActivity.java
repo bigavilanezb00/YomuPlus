@@ -1,4 +1,4 @@
-package com.example.yomuplus;
+package com.example.yomuplus.activities;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.yomuplus.MyApplication;
 import com.example.yomuplus.databinding.ActivityPdfDetailBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

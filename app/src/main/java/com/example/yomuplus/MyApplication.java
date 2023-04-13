@@ -67,7 +67,7 @@ public class MyApplication extends Application {
         progressDialog.show();
 
         Log.d(TAG, "deleteBook: Borrado desde el almacenamiento ...");
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(bookUrl);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(bookUrl);
         storageReference.delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -75,7 +75,7 @@ public class MyApplication extends Application {
                         Log.d(TAG, "onSuccess: Borrado del almacenamiento");
 
                         Log.d(TAG, "onSuccess: Ahora borrandolo de la base de datos");
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Libros");
                         reference.child(bookId)
                                 .removeValue()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

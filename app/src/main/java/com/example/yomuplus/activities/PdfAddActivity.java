@@ -1,4 +1,4 @@
-package com.example.yomuplus;
+package com.example.yomuplus.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -143,7 +143,7 @@ public class PdfAddActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
                         Log.d(TAG, "onFailure: La subida del PDF a fallado debido a "+e.getMessage());
-                        Toast.makeText(PdfAddActivity.this, "La subida del PDF a fallado debido a ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PdfAddActivity.this, "La subida del PDF a fallado debido a "+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
         

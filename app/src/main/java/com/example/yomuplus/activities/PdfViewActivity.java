@@ -1,4 +1,4 @@
-package com.example.yomuplus;
+package com.example.yomuplus.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.yomuplus.Constants;
 import com.example.yomuplus.databinding.ActivityPdfViewBinding;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;

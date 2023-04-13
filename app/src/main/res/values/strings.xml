@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">YomuPlus</string>
-    <string name="nuevo_usuario_registrate">¿Nuevo usuario? <b>Registrate</b></string><!--Hacemos Regitrate de tipo bold -->
+    <string name="nuevo_usuario_registrate">¿Nuevo usuario? <b>Registrate</b></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string><!--Hacemos Regitrate de tipo bold -->
 </resources>
