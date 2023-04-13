@@ -163,80 +163,11 @@ public class RegisterActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFailure(Exception e) {
                         //datos fallidos agregados a la base de datos
                         progressDialog.dismiss();
                         Toast.makeText(RegisterActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
-
-    /*Button registerButton;
-    EditText name, email, password;
-    FirebaseFirestore mFirestore;
-    FirebaseAuth mAuth;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        mFirestore = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-
-        name = findViewById(R.id.nombreRegisterEditText);
-        email = findViewById(R.id.emailRegisterEditText);
-        password = findViewById(R.id.contrasenaRegisterEditText);
-        registerButton = findViewById(R.id.registerButton);
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String nameUser = name.getText().toString().trim();
-                String emailUser = email.getText().toString().trim();
-                String passUser = password.getText().toString().trim();
-
-                if (nameUser.isEmpty() && emailUser.isEmpty() && passUser.isEmpty()){
-                    Toast.makeText(RegisterActivity.this, "Complete los datos", Toast.LENGTH_SHORT).show();
-                }else{
-                    registerUser(nameUser, emailUser, passUser);
-                }
-            }
-        });
-    }
-
-
-    private void registerUser(String nameUser, String emailUser, String passwordUser) {
-        mAuth.createUserWithEmailAndPassword(emailUser, passwordUser).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                String id = mAuth.getCurrentUser().getUid();
-                Map<String, Object> map = new HashMap<>();
-                map.put("id", id);
-                map.put("name", nameUser);
-                map.put("email", emailUser);
-                map.put("password", passwordUser);
-
-                mFirestore.collection("user").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        finish();
-                        startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-                        Toast.makeText(RegisterActivity.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegisterActivity.this, "Error al guardar", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(RegisterActivity.this, "Error al registrar.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
 }
