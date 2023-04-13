@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
             // si el nombre esta vacio lo tiene que introducir
             Toast.makeText(this, "Introduce tu nombre", Toast.LENGTH_SHORT).show();
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            // si el correo no es correo o no es valido no permite continuar
+            // si el correo no es valido no permite continuar
             Toast.makeText(this, "Correo electrónico no valido", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(password)) {
             //si la contraseña esta vacia no permite avanzar sin intriducir una
