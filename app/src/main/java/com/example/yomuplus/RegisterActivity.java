@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -54,7 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.setTitle("Por favor espera");
         progressDialog.setCanceledOnTouchOutside(false);
 
-
         //habilitamos el boton para ir atrás
 
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         email = binding.emailEt.getText().toString().trim();
         password = binding.passwordEt.getText().toString().trim();
         String cPaswword = binding.cPasswordEt.getText().toString().trim();
-        
+
         //validamos los datos
         if (TextUtils.isEmpty(name)) {
             // si el nombre esta vacio lo tiene que introducir
@@ -121,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFailure(Exception e) {
                         //proceso de creacion de cuenta fallido
                         progressDialog.dismiss();
                         Toast.makeText(RegisterActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
