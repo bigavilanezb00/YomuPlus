@@ -5,6 +5,7 @@ import static com.example.yomuplus.Constants.MAX_BYTES_PDF;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Environment;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -31,11 +32,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
 public class MyApplication extends Application {
+
+    private static final String TAG_DOWNLOAD = "DOWNLOAD_TAG";
 
     @Override
     public void onCreate() {
@@ -224,6 +229,107 @@ public class MyApplication extends Application {
                         reference.child(bookId)
                                 .updateChildren(hashMap);
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    public static void downloadBook(Context context, String bookId, String bookTitle, String bookUrl) {
+        Log.d(TAG_DOWNLOAD, "downloadBook: descargando libro ...");
+        String nameWithExtension = bookTitle + ".pdf";
+        Log.d(TAG_DOWNLOAD, "downloadBook: NOMBRE: "+nameWithExtension);
+
+        ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle("Por favor esperé");
+        progressDialog.setMessage("Descargando "+ nameWithExtension+ "...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(bookUrl);
+        storageReference.getBytes(MAX_BYTES_PDF)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Log.d(TAG_DOWNLOAD, "onSuccess: Libro descargado");
+                        Log.d(TAG_DOWNLOAD, "onSuccess: Guardando libro");
+                        saveDownloadedBook(context, progressDialog, bytes, nameWithExtension, bookId);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG_DOWNLOAD, "onFailure: Fallo al descargar debido a "+e.getMessage());
+                        progressDialog.dismiss();
+                        Toast.makeText(context, "Fallo al descargar debido a "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private static void saveDownloadedBook(Context context, ProgressDialog progressDialog, byte[] bytes, String nameWithExtension, String bookId) {
+        Log.d(TAG_DOWNLOAD, "saveDownloadedBook: Guardando libro descargado");
+        try {
+            File downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            downloadFolder.mkdirs();
+
+            String filePath = downloadFolder.getPath() + "/" + nameWithExtension;
+            FileOutputStream out = new FileOutputStream(filePath);
+            out.write(bytes);
+            out.close();
+
+            Toast.makeText(context, "Guardado en la carpeta de descargas", Toast.LENGTH_SHORT).show();
+            Log.d(TAG_DOWNLOAD, "saveDownloadedBook: Guardado en la carpeta de descargas");
+            progressDialog.dismiss();
+
+            incrementBookDownloadCount(bookId);
+
+        } catch (Exception e) {
+            Log.d(TAG_DOWNLOAD, "saveDownloadedBook: Fallo al guardar en la carpeta de descarga debido a "+e.getMessage());
+            Toast.makeText(context, "Fallo al guardar en la carpeta de descarga debido a ", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        }
+    }
+
+    private static void incrementBookDownloadCount(String bookId) {
+        Log.d(TAG_DOWNLOAD, "incrementBookDownloadCount: Aumentando el numero de descargas del libro");
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Libros");
+        ref.child(bookId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String downloadsCount = ""+snapshot.child("downloadsCount").getValue();
+                        Log.d(TAG_DOWNLOAD, "onDataChange: Número de descarga: "+downloadsCount);
+
+                        if (downloadsCount.equals("") || downloadsCount.equals("null")) {
+                            downloadsCount = "0";
+                        }
+
+                        long newDownloadCount = Long.parseLong(downloadsCount) + 1;
+                        Log.d(TAG_DOWNLOAD, "onDataChange: Nuevo número de descargas: "+newDownloadCount);
+
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("downloadsCount", newDownloadCount);
+
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Libros");
+                        reference.child(bookId).updateChildren(hashMap)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d(TAG_DOWNLOAD, "onSuccess: Número de descargas actualizado");
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d(TAG_DOWNLOAD, "onFailure: Fallo al actualizar el número de descargas debido a "+e.getMessage());
+                                    }
+                                });
                     }
 
                     @Override

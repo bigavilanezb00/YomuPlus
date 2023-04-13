@@ -37,7 +37,7 @@
 
     <!-- scroll view contenido -->
     <ScrollView
-        android:layout_above="@id/readBookBtn"
+        android:layout_above="@id/bookOptionsLl"
         android:layout_below="@id/toolbarRl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -216,14 +216,34 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Boton leer -->
-    <Button
-        android:id="@+id/readBookBtn"
+    <LinearLayout
+        android:id="@+id/bookOptionsLl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:drawableTop="@drawable/ic_book_white"
-        android:text="Leer"
-        android:background="@color/design_default_color_primary"/>
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <!-- Boton leer -->
+        <Button
+            android:id="@+id/readBookBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_book_white"
+            android:text="Leer"
+            android:background="@color/design_default_color_primary"/>
+
+        <!-- Boton descargar -->
+        <Button
+            android:id="@+id/downloadBookBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_download_white"
+            android:text="Descargar"
+            android:background="@color/design_default_color_primary"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
