@@ -1,4 +1,4 @@
-package com.example.yomuplus;
+package com.example.yomuplus.models;
 
 public class ModelCategory {
     //nos aseguramos de usar los mismos nombres que en firebase

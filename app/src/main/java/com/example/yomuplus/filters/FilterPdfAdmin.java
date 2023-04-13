@@ -1,22 +1,27 @@
-package com.example.yomuplus;
+package com.example.yomuplus.filters;
 
 import android.widget.Filter;
 
+import com.example.yomuplus.adapters.AdapterCategory;
+import com.example.yomuplus.adapters.AdapterPdfAdmin;
+import com.example.yomuplus.models.ModelCategory;
+import com.example.yomuplus.models.ModelPdf;
+
 import java.util.ArrayList;
 
-public class FilterCategory extends Filter {
+public class FilterPdfAdmin extends Filter {
 
     //Creamos un ArrayList en al que queramos buscar
-    ArrayList<ModelCategory> filterList;
+    ArrayList<ModelPdf> filterList;
 
-    AdapterCategory adapterCategory;
+    AdapterPdfAdmin adapterPdfAdmin;
 
     //constructor
 
 
-    public FilterCategory(ArrayList<ModelCategory> filterList, AdapterCategory adapterCategory) {
+    public FilterPdfAdmin(ArrayList<ModelPdf> filterList, AdapterPdfAdmin adapterPdfAdmin) {
         this.filterList = filterList;
-        this.adapterCategory = adapterCategory;
+        this.adapterPdfAdmin = adapterPdfAdmin;
     }
 
 
@@ -25,10 +30,10 @@ public class FilterCategory extends Filter {
         FilterResults results = new FilterResults();
         if (constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
-            ArrayList<ModelCategory> filterModels = new ArrayList<>();
+            ArrayList<ModelPdf> filterModels = new ArrayList<>();
             for (int i = 0; i < filterList.size(); i++) {
                 //validamos
-                if (filterList.get(i).getCategory().toUpperCase().contains(constraint)) {
+                if (filterList.get(i).getTitle().toUpperCase().contains(constraint)) {
                     filterModels.add(filterList.get(i));
                 }
             }
@@ -44,8 +49,8 @@ public class FilterCategory extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        adapterCategory.categoryArrayList = (ArrayList<ModelCategory>) results.values;
+        adapterPdfAdmin.pdfArrayList = (ArrayList<ModelPdf>)results.values;
 
-        adapterCategory.notifyDataSetChanged();
+        adapterPdfAdmin.notifyDataSetChanged();
     }
 }
