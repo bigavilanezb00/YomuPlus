@@ -23,6 +23,7 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +38,8 @@ import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+
+import kotlinx.coroutines.JobKt;
 
 public class MyApplication extends Application {
 
@@ -138,7 +141,7 @@ public class MyApplication extends Application {
                 });
     }
 
-    public static void loadPdfFromUrlSinglePage(String pdfUrl, String pdfTitle, PDFView pdfView, ProgressBar progressBar) {
+    public static void loadPdfFromUrlSinglePage(String pdfUrl, String pdfTitle, PDFView pdfView, ProgressBar progressBar, TextView pagesTv) {
 
         String TAG = "PDF_LOAD_SINGLE_PAGE";
 
@@ -173,6 +176,10 @@ public class MyApplication extends Application {
                                     public void loadComplete(int nbPages) {
                                         progressBar.setVisibility(View.INVISIBLE);
                                         Log.d(TAG, "loadComplete: Pdf cargado");
+
+                                        if (pagesTv !=  null) {
+                                            pagesTv.setText(""+nbPages);
+                                        }
                                     }
                                 })
                                 .load();
@@ -337,6 +344,66 @@ public class MyApplication extends Application {
 
                     }
                 });
+    }
+
+    public  static void addToFavorite(Context context, String bookId) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        if (firebaseAuth.getCurrentUser() == null ) {
+            Toast.makeText(context, "Inicie sesión por favor", Toast.LENGTH_SHORT).show();
+        }
+
+        else {
+            long timestamp = System.currentTimeMillis();
+
+            HashMap<String, Object>  hashMap = new HashMap<>();
+            hashMap.put("bookId", ""+bookId);
+            hashMap.put("timestamp", ""+timestamp);
+
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+            ref.child(firebaseAuth.getUid()).child("Favoritos").child(bookId)
+                    .setValue(hashMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "Agregado a la lista favoritos", Toast.LENGTH_SHORT).show();
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Fallo al agregar a la lista favoritos debido a "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    public static void removeFromFavorite(Context context, String bookId) {
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() == null) {
+            Toast.makeText(context, "Inicie sesión por favor", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+            ref.child(firebaseAuth.getUid()).child("Favoritos").child(bookId)
+                    .removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "Eliminado de la lista favoritos", Toast.LENGTH_SHORT).show();
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Fallo al eliminar de la lista favoritos debido a " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 
 }
