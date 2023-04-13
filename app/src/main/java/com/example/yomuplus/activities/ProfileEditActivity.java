@@ -112,7 +112,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                         binding.nameEt.setText(name);
 
                         //colocamos la imagn utilizando glide
-                        Glide.with(ProfileEditActivity.this)
+                        Glide.with(getApplicationContext())
                                 .load(profileImage)
                                 .placeholder(R.drawable.ic_persona_gray)
                                 .into(binding.profileIv);
@@ -149,7 +149,7 @@ public class ProfileEditActivity extends AppCompatActivity {
 
         String filePathAndName = "ProfileImages/"+firebaseAuth.getUid();
 
-        StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(filePathAndName);
+        StorageReference reference = FirebaseStorage.getInstance().getReference(filePathAndName);
         reference.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -213,7 +213,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private void showImageAttachMenu() {
         PopupMenu popupMenu = new PopupMenu(this, binding.profileIv);
         popupMenu.getMenu().add(Menu.NONE, 0, 0, "Camara");
-        popupMenu.getMenu().add(Menu.NONE, 0, 0, "Galeria");
+        popupMenu.getMenu().add(Menu.NONE, 1, 1, "Galeria");
 
         popupMenu.show();
 
