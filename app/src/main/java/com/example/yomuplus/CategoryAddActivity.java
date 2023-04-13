@@ -107,7 +107,7 @@ public class CategoryAddActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         //Subida fallida
                         progressDialog.dismiss();
-                        Toast.makeText(CategoryAddActivity.this, "", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CategoryAddActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         
                     }
                 });

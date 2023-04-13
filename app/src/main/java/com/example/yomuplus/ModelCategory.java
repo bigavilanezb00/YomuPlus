@@ -1,7 +1,7 @@
 package com.example.yomuplus;
 
 public class ModelCategory {
-    //nos asegurams de usar los mismos nombres que en firebase
+    //nos aseguramos de usar los mismos nombres que en firebase
 
     String id, category, uid;
     long timestamp;

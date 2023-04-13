@@ -1,9 +1,13 @@
 package com.example.yomuplus;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,19 +16,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yomuplus.databinding.RowCategoryBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class AdapterCategory extends  RecyclerView.Adapter<AdapterCategory.HolderCategory> {
+public class AdapterCategory extends  RecyclerView.Adapter<AdapterCategory.HolderCategory> implements Filterable {
 
     private Context context;
-    private ArrayList<ModelCategory> categoryArrayList;
+    public ArrayList<ModelCategory> categoryArrayList, filterList;
 
     private RowCategoryBinding binding;
+
+    private FilterCategory filter;
 
     public AdapterCategory(Context context, ArrayList<ModelCategory> categoryArrayList) {
         this.context = context;
         this.categoryArrayList = categoryArrayList;
+        this.filterList = categoryArrayList;
     }
 
     @NonNull
@@ -37,7 +48,7 @@ public class AdapterCategory extends  RecyclerView.Adapter<AdapterCategory.Holde
     @Override
     public void onBindViewHolder(@NonNull AdapterCategory.HolderCategory holder, int position) {
         ModelCategory model = categoryArrayList.get(position);
-        String id = model.getCategory();
+        String id = model.getId();
         String category = model.getCategory();
         String uid = model.getUid();
         long timestamp = model.getTimestamp();
@@ -47,15 +58,61 @@ public class AdapterCategory extends  RecyclerView.Adapter<AdapterCategory.Holde
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, ""+category, Toast.LENGTH_SHORT).show();
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Borrar")
+                        .setMessage("¿Estás seguro de querer eliminar esta categoria?")
+                        .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(context, "Eliminando...", Toast.LENGTH_SHORT).show();
+                                deleteCategory(model, holder);
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
     }
 
+    private void deleteCategory(ModelCategory model, HolderCategory holder) {
+        //cogemos el id de la categoria para eliminarlo
+        String id = model.getId();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categorias");
+        ref.child(id)
+                .removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        //ELIMINADO CONFIRMADO
+                        Toast.makeText(context, "Categoria eliminada correctamente", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //FALLO AL ELIMINAR
+                        Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
     @Override
     public int getItemCount() {
-        return 0;
+        return categoryArrayList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new FilterCategory(filterList, this);
+        }
+        return filter;
     }
 
     class HolderCategory extends RecyclerView.ViewHolder {
