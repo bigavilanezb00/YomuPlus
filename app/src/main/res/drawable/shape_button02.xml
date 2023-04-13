@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!--Hacemos que el fondo del boton se vuelva transparent-->
+    <solid android:color="@android:color/transparent"/>
+
+    <!-- contorno -->
+    <corners android:radius="10dp"/>
+
+    <!-- color bordes-->
+    <stroke android:color="@color/purple500"
+        android:width="1dp"/>
+
+
+</shape>

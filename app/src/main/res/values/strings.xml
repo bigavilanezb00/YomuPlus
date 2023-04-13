@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">YomuPlus</string>
+    <string name="nuevo_usuario_registrate">¿Nuevo usuario? <b>Registrate</b></string><!--Hacemos Regitrate de tipo bold -->
 </resources>
