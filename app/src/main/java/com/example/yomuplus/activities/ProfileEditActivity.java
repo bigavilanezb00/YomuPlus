@@ -112,7 +112,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                         binding.nameEt.setText(name);
 
                         //colocamos la imagn utilizando glide
-                        Glide.with(getApplicationContext())
+                        Glide.with(ProfileEditActivity.this)
                                 .load(profileImage)
                                 .placeholder(R.drawable.ic_persona_gray)
                                 .into(binding.profileIv);

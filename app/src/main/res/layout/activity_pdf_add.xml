@@ -6,141 +6,143 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_login"
     tools:context=".activities.PdfAddActivity">
-    
-    <!-- toolbar -->
-    
-    <RelativeLayout
-        android:id="@+id/toolbarRl"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/shape_toolbar01">
 
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
+    <!-- toolbar -->
+
+        <RelativeLayout
+            android:id="@+id/toolbarRl"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/shape_toolbar01">
+
+            <ImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_back_white"/>
+
+            <ImageView
+                android:id="@+id/iconIv"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/backBtn"
+                android:src="@drawable/logo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iconIv"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Agregar nuevo libro"
+                android:textColor="@color/blanco"
+                android:textSize="20sp"/>
+
+            <!-- boton adjuntar pdf -->
+            <ImageButton
+                android:id="@+id/attachBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_attach_white"/>
+
+        </RelativeLayout>
+
+
+    <!-- Agregar titulo -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titleTil"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            android:padding="5dp"
-            android:src="@drawable/ic_back_white"/>
-        
-        <ImageView
-            android:id="@+id/iconIv"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/backBtn"
-            android:src="@drawable/logo"/>
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="225dp"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/titleEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edittext01"
+                android:drawableStart="@drawable/ic_pdf_gray"
+                android:drawablePadding="10dp"
+                android:hint="Titulo libro"
+                android:inputType="textPersonName|textCapWords"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/negro"
+                android:textColorHint="@color/gray01"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Agregar descripción -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descripcionTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_below="@id/titleTil"
+            android:layout_marginTop="5dp"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/descripcionEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edittext01"
+                android:drawableStart="@drawable/ic_pdf_gray"
+                android:drawablePadding="10dp"
+                android:hint="Descripción libro"
+                android:inputType="textMultiLine|textCapSentences"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/negro"
+                android:textColorHint="@color/gray01"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Elegir categoria -->
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iconIv"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Agregar nuevo libro"
-            android:textColor="@color/blanco"
-            android:textSize="20sp"/>
-
-        <!-- boton adjuntar pdf -->
-        <ImageButton
-            android:id="@+id/attachBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            android:padding="5dp"
-            android:src="@drawable/ic_attach_white"/>
-
-    </RelativeLayout>
-    
-    <!-- Agregar titulo -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/titleTil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="225dp"
-        app:hintEnabled="false">
-
-        <EditText
-            android:id="@+id/titleEt"
+            android:id="@+id/categoryTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/descripcionTil"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/shape_edittext01"
-            android:drawableStart="@drawable/ic_pdf_gray"
+            android:drawableStart="@drawable/ic_category_gray"
+            android:drawableEnd="@drawable/ic_down_gray"
             android:drawablePadding="10dp"
-            android:hint="Titulo libro"
-            android:inputType="textPersonName|textCapWords"
+            android:gravity="center_vertical"
+            android:hint="Categoria libro"
             android:padding="10dp"
-            android:textSize="16sp"
+            android:textColorHint="@color/gray01"
             android:textColor="@color/negro"
-            android:textColorHint="@color/gray01"/>
+            android:textSize="16sp"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <!-- Boton subir pdf -->
 
-    <!-- Agregar descripción -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descripcionTil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_below="@id/titleTil"
-        android:layout_marginTop="5dp"
-        app:hintEnabled="false">
-
-        <EditText
-            android:id="@+id/descripcionEt"
+        <Button
+            android:id="@+id/submitBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_edittext01"
-            android:drawableStart="@drawable/ic_pdf_gray"
-            android:drawablePadding="10dp"
-            android:hint="Descripción libro"
-            android:inputType="textMultiLine|textCapSentences"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/negro"
-            android:textColorHint="@color/gray01"/>
+            android:layout_below="@id/categoryTv"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            android:text="Subir"
+            android:textColor="@color/blanco"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Elegir categoria -->
-
-    <TextView
-        android:id="@+id/categoryTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/descripcionTil"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/shape_edittext01"
-        android:drawableStart="@drawable/ic_category_gray"
-        android:drawableEnd="@drawable/ic_down_gray"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:hint="Categoria libro"
-        android:padding="10dp"
-        android:textColorHint="@color/gray01"
-        android:textColor="@color/negro"
-        android:textSize="16sp"/>
-
-    <!-- Boton subir pdf -->
-
-    <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/categoryTv"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="10dp"
-        android:text="Subir"
-        android:textColor="@color/blanco"/>
 
 </RelativeLayout>

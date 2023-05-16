@@ -39,7 +39,7 @@
             android:textStyle="bold"/>
 
         <ImageButton
-            android:id="@+id/profileEditButn"
+            android:id="@+id/profileEditBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -172,10 +172,29 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view1"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray03"
         android:layout_below="@id/detailsLl"/>
+
+    <TextView
+        android:id="@+id/favoriteBooksLabelTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view1"
+        android:text="Libros favoritos"
+        android:padding="5dp"
+        android:textColor="@color/negro"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/booksRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/favoriteBooksLabelTv"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/row_pdf_favorite"/>
 
 </RelativeLayout>
