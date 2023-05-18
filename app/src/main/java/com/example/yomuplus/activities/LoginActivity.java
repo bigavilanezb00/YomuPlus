@@ -62,6 +62,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        binding.forgotTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
     }
 
     private String email = "", password = "";
