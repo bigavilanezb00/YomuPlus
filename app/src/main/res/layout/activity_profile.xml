@@ -110,14 +110,18 @@
                 android:layout_height="wrap_content"
                 android:text="Cuenta"
                 android:textColor="@color/negro"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/accountTypeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="N/A"
-                android:textColor="@color/negro"/>
+                android:text="User"
+                android:textColor="@color/negro"
+                android:textAlignment="center"
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
@@ -134,14 +138,18 @@
                 android:layout_height="wrap_content"
                 android:text="Miembro"
                 android:textColor="@color/negro"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/memberDateTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="N/A"
-                android:textColor="@color/negro"/>
+                android:text="01/01/2023"
+                android:textColor="@color/negro"
+                android:textAlignment="center"
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
@@ -158,17 +166,49 @@
                 android:layout_height="wrap_content"
                 android:text="Favoritos"
                 android:textColor="@color/negro"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/favoriteBookCountTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="N/A"
-                android:textColor="@color/negro"/>
+                android:text="142"
+                android:textColor="@color/negro"
+                android:textAlignment="center"
+                android:textSize="12sp"/>
+
+
 
         </LinearLayout>
 
+        <!-- Esado de la cuenta -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado cuenta"
+                android:textColor="@color/negro"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/accountStatusTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No verificado"
+                android:textColor="@color/negro"
+                android:textAlignment="center"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <View
